@@ -8,6 +8,7 @@ import ConfirmModal from "../confirm-modal";
 import ChooseModal from "../choose-modal";
 import Panel from "../panel";
 import UIkit from "uikit";
+import EditorMeta from "../editor-meta";
 
 export default class Editor extends Component {
   constructor() {
@@ -159,8 +160,6 @@ export default class Editor extends Component {
     const modal = true;
     let spinner;
 
-    console.log(backupsList);
-
     loading ? (spinner = <Spinner active />) : (spinner = <Spinner />);
 
     return (
@@ -181,6 +180,15 @@ export default class Editor extends Component {
           data={backupsList}
           redirect={this.restoreBackup}
         />
+        {this.virtualDom ? (
+          <EditorMeta
+            modal={modal}
+            target={"modal-meta"}
+            virtualDom={this.virtualDom}
+          />
+        ) : (
+          false
+        )}
       </>
     );
   }
