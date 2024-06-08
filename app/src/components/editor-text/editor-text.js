@@ -31,7 +31,7 @@ export default class EditorText {
   }
 
   onBlur() {
-    this.element.removeAttribute("contentEditable");
+    this.element.removeAttribute("contenteditable");
   }
 
   onTextEdit() {

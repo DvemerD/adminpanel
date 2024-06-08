@@ -1,2 +1,2 @@
-import Editor from "./Editor.js";
+import Editor from "./editor";
 export default Editor;

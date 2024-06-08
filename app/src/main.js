@@ -1,5 +1,5 @@
 import React from "react";
-import { createRoot } from 'react-dom/client';
-import Editor from "./components/editor/";
+import ReactDOM from "react-dom";
+import Editor from "./components/editor";
 
-createRoot(document.getElementById('root')).render(<Editor />);
+ReactDOM.render(<Editor />, document.getElementById("root"));

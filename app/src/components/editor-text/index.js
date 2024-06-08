@@ -1,2 +1,2 @@
-import EditorText from "./editor-text.js";
+import EditorText from "./editor-text";
 export default EditorText;

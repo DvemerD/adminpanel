@@ -1,6 +1,6 @@
 const gulp = require("gulp");
 const webpack = require("webpack-stream");
-const sass = require("gulp-sass")(require("sass"));
+const sass = require("gulp-sass");
 
 const distPath = "../admin";
 
@@ -39,7 +39,7 @@ gulp.task("build-js", () => {
             },
           ],
         },
-      })
+      }),
     )
     .pipe(gulp.dest(distPath));
 });
@@ -74,8 +74,8 @@ gulp.task(
     "copy-assets",
     "copy-api",
     "build-sass",
-    "build-js"
-  )
+    "build-js",
+  ),
 );
 
 gulp.task("default", gulp.parallel("watch", "build"));
