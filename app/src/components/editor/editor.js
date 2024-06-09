@@ -66,7 +66,7 @@ export default class Editor extends Component {
     this.loadBackupsList();
   }
 
-  async save(onSuccess, onError) {
+  async save() {
     this.isLoading();
     const newDom = this.virtualDom.cloneNode(this.virtualDom);
     DOMHelper.unwrapTextNodes(newDom);
@@ -74,8 +74,8 @@ export default class Editor extends Component {
     const html = DOMHelper.serializeDOMToString(newDom);
     await axios
       .post("./api/savePage.php", { pageName: this.currentPage, html })
-      .then(onSuccess)
-      .catch(onError)
+      .then(() => this.showNotifications("Успешно сохранено", "success"))
+      .catch(() => this.showNotifications("Ошибка сохранения", "danger"))
       .finally(this.isLoaded);
 
     this.loadBackupsList();
@@ -101,7 +101,13 @@ export default class Editor extends Component {
           `[editableimgid="${id}"]`
         );
 
-        new EditorImages(element, virtualElement);
+        new EditorImages(
+          element,
+          virtualElement,
+          this.isLoading,
+          this.isLoaded,
+          this.showNotifications
+        );
       });
   }
 
@@ -122,6 +128,10 @@ export default class Editor extends Component {
             }
         `;
     this.iframe.contentDocument.head.appendChild(style);
+  }
+
+  showNotifications(message, status) {
+    UIkit.notification({ message, status });
   }
 
   loadPageList() {
@@ -183,7 +193,12 @@ export default class Editor extends Component {
     return (
       <>
         <iframe src="" frameBorder="0"></iframe>
-        <input id="img-upload" type="file" accept="image/*" style={{display: "none"}}></input>
+        <input
+          id="img-upload"
+          type="file"
+          accept="image/*"
+          style={{ display: "none" }}
+        ></input>
         {spinner}
         <Panel />
         <ConfirmModal modal={modal} target={"modal-save"} method={this.save} />
