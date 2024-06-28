@@ -39,7 +39,7 @@ gulp.task("build-js", () => {
             },
           ],
         },
-      }),
+      })
     )
     .pipe(gulp.dest(distPath));
 });
@@ -52,6 +52,8 @@ gulp.task("build-sass", () => {
 });
 
 gulp.task("copy-api", () => {
+  gulp.src("./app/api/**/.*").pipe(gulp.dest(distPath + "/api"));
+
   return gulp.src("./app/api/**/*.*").pipe(gulp.dest(distPath + "/api"));
 });
 
@@ -74,8 +76,8 @@ gulp.task(
     "copy-assets",
     "copy-api",
     "build-sass",
-    "build-js",
-  ),
+    "build-js"
+  )
 );
 
 gulp.task("default", gulp.parallel("watch", "build"));

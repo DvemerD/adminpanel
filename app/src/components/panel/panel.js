@@ -22,10 +22,16 @@ const Panel = () => {
         Редактировать МЕТА
       </button>
       <button
-        className="uk-button uk-button-default"
+        className="uk-button uk-button-default uk-margin-small-right"
         uk-toggle="target: #modal-backup"
       >
         Восстановить
+      </button>
+      <button
+        className="uk-button uk-button-danger "
+        uk-toggle="target: #modal-logout"
+      >
+        Выйти
       </button>
     </div>
   );
